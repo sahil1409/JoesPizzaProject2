@@ -3,7 +3,39 @@
 @{
     ViewData["Title"] = "About";
 }
-<br />
+<div class="row">
+
+            <div class="col-md-12">
+                <div id="nav-menus">
+
+                    <ul class="nav nav-pills">
+                        <li class="link"><a style="border-radius:5px;" href="/Index">Home</a></li>
+                        <li class="link"><a style="border-radius:5px;" href="/Contact">Contact</a></li>
+                        <li class="link active"><a style="border-radius:5px;" href="/About">About</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
 <h4>Your application description page.</h4>
 
 <p>Use this area to provide additional information.</p>
+
+<script>
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("nav-menus");
+        var list = header.getElementsByClassName("link");
+        for (var i = 0; i < list.length; i++) {
+            list[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                if (current.length > 0) {
+                    current[0].className = current[0].className.replace(" active", "");
+                }
+                this.className += " active";
+            });
+        }
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>

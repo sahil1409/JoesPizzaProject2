@@ -3,42 +3,106 @@
 @{
     ViewData["Title"] = "Home Page - ASP.NET Core";
 }
+<div class="row">
 
-<div class="main-container">
-    <div class="cloud-image">
-        <img src="~/images/successCloudNew.svg" />
-    </div>
-    <div class="content">
-        <div class="tweet-container">
-            <a href="https://twitter.com/intent/tweet/?text=I%20just%20created%20a%20new%20ASP.net%20website%20on%20%40Azure%20using%20%40GitHub&hashtags=GitHubWorkflow">
-                <img src="~/images/tweetThis.svg" />
-            </a>            
+            <div class="col-md-12">
+                <div id="nav-menus">
+
+                    <ul class="nav nav-pills" style = "display: inline-block;">
+                        <li class="link active"><a style="border-radius:5px;" href="/Index">Home</a></li>
+                        <li class="link"><a style="border-radius:5px;" href="/Contact">Contact</a></li>
+                        <li class="link"><a style="border-radius:5px;" href="/About">About</a></li>
+                    </ul>
+
+               
+
         </div>
-        <div class="content-body">
-            <div class="success-text">Success!</div>
-            <div class="description line-1"> GitHub Workflow has been successfully setup</div>
-            <div class="description line-2"> Your ASP.NET MVC app is up and running on Azure</div>
-        </div>
-    </div>
+            </div>
+
 </div>
+
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="imgOverlay"></div>
+            <img style="height: 500px; width: 100%;" src="https://images.deliveryhero.io/image/fd-pk/LH/uv9g-hero.jpg" alt="First slide">
+            <div class="carousel-caption">
+                <h1 style = "color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; font-family: 'Segoe Print'"><b>Cheese Burst Pizza</b></h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height: 500px; width: 100%;" src="https://s1.1zoom.me/prev/500/499725.jpg" alt="Second slide">
+            <div class="carousel-caption">
+                <h1 style = "color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; font-family: 'Segoe Print'" ><b>Veg Supreme Pizza</b></h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height: 500px; width: 100%;" src="https://insanelygoodrecipes.com/wp-content/uploads/2022/04/Homemade-Pizza-with-Pepperoni-and-Cheese.jpg" alt="Third slide">
+            <div class="carousel-caption">
+                <h1 style = "color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; font-family: 'Segoe Print'" ><b>Pepperoni Pizza</b></h1>
+            </div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+</div>
+
+<div class="olContent f1"><h2>Search Product</h2></div>
+<form method="post">
+    <div class="olSearch fr">
+        <input style="height: 44px;" type="text" name="search" placeholder="Enter Keyword" class="inputComn houseText form-control" />
+        <div class="searchIcon">
+            <button type="submit" class="searchBtn">
+                <img style="height: 22px; width: 22px;" src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-21.png" />
+            </button>
+        </div>
+    </div>
+</form>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Get started right away </h2>
-        <p>
-            Clone your code repository and start developing your application on IDE of your choice
-        </p>
-        <p><a class="btn btn-default" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Continuous Delivery</h2>
-        <p>View your GitHub workflow and customize it as per your needs</p>
-        <p><a class="btn btn-default" href="https://docs.github.com/en/actions">Learn more &raquo;</a></p>
-    </div>
-        <div class="col-md-4">
-        <h2>DevOps Starter</h2>
-        <p>Learn more about all you can do with DevOps starter by visiting the documentation</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?linkid=862126">Learn more &raquo;</a></p>
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Our Menu <small>Trending</small></h2>
+        </div>
+
     </div>
 </div>
 
+<div class="row product-container">
+
+    @foreach (var product in Model.Products)
+    {
+
+    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+        <div class="thumbnail product-item" style="height:360px">
+
+            <img class="img-responsive" title="Click to View Product detail"
+                style="cursor:pointer;height:220px;width:auto"
+                src="@product.Photo" />
+
+            <div class="caption">
+                <h5 class="shop-item-title">@product.Name</h5>
+                <p class="shop-item-price">@product.Price</p>
+                <a asp-page="cart" asp-page-handler="buynow" asp-route-id="@product.Id">Add to Cart</a>
+                <p>Available</p>
+            </div>
+
+        </div>
+    </div>
+
+    }
+
+</div>

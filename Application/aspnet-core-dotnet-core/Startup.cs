@@ -24,6 +24,7 @@ namespace aspnet_core_dotnet_core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -31,13 +32,15 @@ namespace aspnet_core_dotnet_core
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSession();
             services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSession();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -51,10 +54,12 @@ namespace aspnet_core_dotnet_core
             app.UseCookiePolicy();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }
